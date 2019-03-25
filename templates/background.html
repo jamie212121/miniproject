@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Best Breweries In Town</title>
+  </head>
+  <body style="background-color:Blue;">
+    <table width="800" border="1" class="table">
+      <tr>
+        <th>Company Name</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Phone</th>
+        <th>Website URL</th>
+      </tr>
+        {% for x in result %}
+      <tr>
+        <td>{{x.name}}</td>
+        <td>{{x.city}}</td>
+        <td>{{x.state}}</td>
+        <td>{{x.phone}}</td>
+        <td>{{x.website_url}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</table>
+</html>
