@@ -1,6 +1,23 @@
 # miniproject
 
-Step 1: docker pull cassandra:latest
+Welcome to Smiths' Brewery! 
+
+This app allows the user to search the different breweries located by city, state and brewery name. Details inclue locations, website urls and phone numbers.
+
+
+## How to run in terminal 
+- enter ECS781P file 
+- cd into file where test.py exists 
+
+python test.py 
+
+terminal will acitivate a link which will direct you to Smiths' Brewery
+
+from the home page, user can navigate and locate different breweries depending on location 
+
+## Running on gcp 
+
+- Step 1: docker pull cassandra:latest
 
 Step 2: docker run --name cassandra-test -d cassandra:latest
 
@@ -16,9 +33,10 @@ Step 8: COPY mydata.stats(ID, Name, State)
         FROM '/home/brewersinfo.csv'
         WITH DELIMITER=',' AND HEADER=TRUE;
 
-Step 9: select * from brewerybeer.stats;
+Step 9: select * from brewerybeer.stats;]
 
-tep 1: gcloud config set compute/zone europe-west2-b
+## Kubernetes
+Step 1: gcloud config set compute/zone europe-west2-b
 
 Step 2: gcloud container clusters create cassandra --num-nodes=3 --machine-type "n1-standard-2"
 
