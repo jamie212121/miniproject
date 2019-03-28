@@ -18,3 +18,39 @@ Step 8: COPY mydata.stats(ID, Name, State)
 
 Step 9: select * from brewerybeer.stats;
 
+tep 1: gcloud config set compute/zone europe-west2-b
+
+Step 2: gcloud container clusters create cassandra --num-nodes=3 --machine-type "n1-standard-2"
+
+Step 3: wget -O cassandra-peer-service.yml https://tinyurl.com/y6m9herz
+
+Step 4: wget -O cassandra-service.yml https://tinyurl.com/y6m9herz
+
+Step 5: wget -O cassandra-replication-controller.yml https://tinyurl.com/y6m9herz
+
+Step 6: kubectl create -f cassandra-peer-service.yml
+
+Step 7: kubectl scale rc cassandra --replicas=3
+
+Step 8: kubectl create -f cassandra-replication-controller.yml
+
+Step 9: kubectl get pods -l name=cassandra
+
+Step 10: kubectl scale rc cassandra --replicas=3
+
+Step 11: kubectl exec -it cassandra-2ggnn -- nodetool status
+
+Step 12: kubectl cp brewersinfo.csv cassandra-2ggnn:/brewersinfo.csv
+
+Step 13: kubectl exec -it cassandra-2ggnn cqlsh
+
+Step 14: CREATE KEYSPACE mydata WITH REPLICATION =
+        {'class' : 'SimpleStrategy', 'replication_factor' : 2};
+
+Step 15: CREATE TABLE brewerybeer.stats (ID int, Name text PRIMARY KEY, State text);
+
+Step 16: COPY brewerybeer.stats(ID, Name, State)
+         FROM 'brewersinfo.csv'
+         WITH DELIMITER=',' AND HEADER=TRUE;
+
+Step 17: select * from brewerybeer.stats;
