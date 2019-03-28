@@ -72,3 +72,11 @@ Step 16: COPY brewerybeer.stats(ID, Name, State)
          WITH DELIMITER=',' AND HEADER=TRUE;
 
 Step 17: select * from brewerybeer.stats;
+
+
+
+## Clean up
+```
+kubectl delete --all replicationcontroller
+kubectl delete --all services
+```
