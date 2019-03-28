@@ -1,6 +1,6 @@
 # miniproject
 
-Welcome to Smiths' Brewery! 
+## Welcome to Smiths' Brewery! 
 
 This app allows the user to search the different breweries located by city, state and brewery name. Details inclue locations, website urls and phone numbers.
 
