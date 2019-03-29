@@ -15,7 +15,7 @@ by_state = 'https://api.openbrewerydb.org/breweries?by_state={variableName}'
 @app.route('/')
 def home():
     return "<h1> Welcome to Smiths' Brewery </h1>"
-
+# This returns the home page of Smiths' Brewery, from this point on you can navihate exactly which data youd like to access
 @app.route('/breweries', methods=['GET'])
 def breweries():
     response = requests.get(brewery_url).json()
@@ -26,8 +26,9 @@ def breweries():
         brewery_info['State'].append(x['state'])
         brewery_info['Phone'].append(x['phone'])
         brewery_info['Website_url'].append(x['website_url'])
-    #return jsonify(brewery_info)
-    return render_template('background.html', result = response)
+    return jsonify(brewery_info)
+    #return render_template('background.html', result = response)
+# Returns data in a json format, specifcally accesses all breweries in the data 
 
 @app.route('/name/<brewery_name>', methods=['GET'])
 def brewery_name(brewery_name):
@@ -43,8 +44,9 @@ def brewery_name(brewery_name):
         brewery_info['State'].append(x['state'])
         brewery_info['Phone'].append(x['phone'])
         brewery_info['Website_url'].append(x['website_url'])
-    #return jsonify(brewery_info)
-    return render_template('background.html', result = response)
+    return jsonify(brewery_info)
+    #return render_template('background.html', result = response)
+# Returns data in a json format, specifically, if you type the name of a brewery you can extrapolate the infomation above e.g city state phone ect
 
 @app.route('/city/<brewery_city>', methods=['GET'])
 def brewery_city(brewery_city):
@@ -60,9 +62,9 @@ def brewery_city(brewery_city):
         brewery_info['State'].append(x['state'])
         brewery_info['Phone'].append(x['phone'])
         brewery_info['Website_url'].append(x['website_url'])
-    #return jsonify(brewery_info)
-    return render_template('background.html', result = response)
-
+    return jsonify(brewery_info)
+    #return render_template('background.html', result = response)
+# Returns data in a json format, specifically, will return information regarding the city of the brewery
 @app.route('/state/<brewery_state>', methods=['GET'])
 def brewery_state(brewery_state):
     url = by_state.format(variableName=brewery_state)
@@ -70,6 +72,7 @@ def brewery_state(brewery_state):
     brewery_info = {'CompanyName' : [], 'City': [], 'State' : [], 'Phone' : [], 'Website_url' : []}
     if response.status_code == 404:
         return "<h2>Error, page does not exist!</h2>", 404
+    # Returns error when incorrect information is wrote
     response = response.json()
     for x in response:
         brewery_info['CompanyName'].append(x['name'])
@@ -77,8 +80,9 @@ def brewery_state(brewery_state):
         brewery_info['State'].append(x['state'])
         brewery_info['Phone'].append(x['phone'])
         brewery_info['Website_url'].append(x['website_url'])
-    #return jsonify(brewery_info)
-    return render_template('background.html', result = response)
+    return jsonify(brewery_info)
+    #return render_template('background.html', result = response)
+# Returns data in json format, specifically data from the state of the brewery, which breweries are located in whar state
 
 
 
