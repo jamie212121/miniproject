@@ -30,24 +30,6 @@ def breweries():
     #return render_template('background.html', result = response)
 # Returns data in a json format, specifcally accesses all breweries in the data 
 
-@app.route('/name/<brewery_name>', methods=['GET'])
-def brewery_name(brewery_name):
-    url = by_name.format(variableName=brewery_name)
-    response = requests.get(url)
-    brewery_info = {'CompanyName' : [], 'City': [], 'State' : [], 'Phone' : [], 'Website_url' : []}
-    if response.status_code == 404:
-        return "<h2>Error, page does not exist!</h2>", 404
-    response = response.json()
-    for x in response:
-        brewery_info['CompanyName'].append(x['name'])
-        brewery_info['City'].append(x['city'])
-        brewery_info['State'].append(x['state'])
-        brewery_info['Phone'].append(x['phone'])
-        brewery_info['Website_url'].append(x['website_url'])
-    return jsonify(brewery_info)
-    #return render_template('background.html', result = response)
-# Returns data in a json format, specifically, if you type the name of a brewery you can extrapolate the infomation above e.g city state phone ect
-
 @app.route('/city/<brewery_city>', methods=['GET'])
 def brewery_city(brewery_city):
     url = by_city.format(variableName=brewery_city)
